@@ -102,12 +102,6 @@ docker exec -it cassandra cqlsh localhost 9042
 
 ---
 
-## CONCLUSIÓ
-
-La instal·lació d'Apache Cassandra sobre Docker en Debian és una opció pràctica i eficient per a entorns de desenvolupament o proves. Permet una instal·lació ràpida i controlada, amb possibilitat d'escalar fàcilment. També s’ha documentat la configuració del firewall i seguretat bàsica.
-
----
-
 ## SECURITZACIÓ I OPERACIONS
 
 ### Securització del sistema
