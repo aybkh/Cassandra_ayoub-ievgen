@@ -1,5 +1,5 @@
 
-# APACHE CASSANDRA
+# APACHE CASSANDRA BBDD
 
 ### 1r ASIX  
 **Ievgen Soloviov**  
