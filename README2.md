@@ -53,41 +53,42 @@ Accedeix a la línia de comandes de Cassandra (CQLSH):
 docker exec -it cassandra cqlsh
 ```
 
-Per llistar els Keyspaces que té Cassandra per defecte s’utilitza la sentència:
+Per llistar els Keyspaces que té Cassandra per defecte:
 
-```
+```sql
 DESCRIBE KEYSPACES;
 ```
 
-Per crear un nou keyspace s’utilitza la sentència:
+Crear un nou keyspace:
 
-```
-CREATE KEYSPACE
-```
-
-Per a utilitzar un keyspace s’utilitza la sentència:
-
-```
-USE <nom del keyspace>;
+```sql
+CREATE KEYSPACE <nom_keyspace> WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 ```
 
-Per a crear una taula es fa amb:
+Utilitzar un keyspace:
 
-```
-CREATE TABLE;
-```
-
-Per a inserir dades a la taula ho fem amb:
-
-```
-INSERT INTO;
+```sql
+USE <nom_keyspace>;
 ```
 
-I per llistar les dades:
+Crear una taula:
 
+```sql
+CREATE TABLE <taula> (id UUID PRIMARY KEY, nom text);
 ```
+
+Inserir dades:
+
+```sql
+INSERT INTO <taula> (id, nom) VALUES (uuid(), 'Nom de prova');
+```
+
+Llistar les dades:
+
+```sql
 SELECT * FROM <taula>;
 ```
+
 
 
 ### Configuració del Firewall
