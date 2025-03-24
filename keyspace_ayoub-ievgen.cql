@@ -15,8 +15,12 @@ CREATE TABLE asix (
     edat INT  
 );
 
--- Insertar un registre a la taula asix
-INSERT INTO asix (id, nom, edat) VALUES (uuid(), 'Ievgen', 20);
+-- Inserir registres a la taula asix
+BEGIN BATCH
+    INSERT INTO asix (id, nom, edat) VALUES (uuid(), 'Ayoub', 25);
+    INSERT INTO asix (id, nom, edat) VALUES (uuid(), 'Ievgen', 20);
+APPLY BATCH;
+
 
 -- Consultar tots els registres de la taula asix
 SELECT * FROM asix;
