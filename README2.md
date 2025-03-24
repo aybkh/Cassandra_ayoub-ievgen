@@ -1,4 +1,5 @@
-# DESCRIPCIÓ BASE DE DADES ESCOLLIDA: Apache Cassandra
+DESCRIPCIÓ BASE DE DADES ESCOLLIDA: Apache Cassandra
+
 
 ## Història i suport
 
@@ -21,17 +22,19 @@ Cassandra disposa de diverses edicions que s'adapten a diferents necessitats:
 - **DataStax Enterprise (DSE)**: Versió comercial desenvolupada per DataStax, amb millores en seguretat, suport i optimitzacions per a empreses.
 - **Serveis Cloud**: Proveïdors com Amazon Keyspaces, Microsoft Azure Managed Cassandra i Google Cloud Bigtable ofereixen Cassandra com a servei gestionat al núvol.
 
+
 ## Comparatiu amb altres bases de dades
 
-| Característica          | Apache Cassandra  | Amazon DynamoDB | HBase  |
-|------------------------|-----------------|----------------|-------|
-| **Model de dades**     | Clau-valor i columnes | Clau-valor | Columnar |
-| **Escalabilitat**      | Alta (distribuïda) | Alta (gestionada per AWS) | Alta (Hadoop) |
+| Característica | Apache Cassandra | Amazon DynamoDB | HBase |
+|--------------|----------------|----------------|------|
+| **Model de dades** | Clau-valor i columnes | Clau-valor | Columnar |
+| **Escalabilitat** | Alta (distribuïda) | Alta (gestionada per AWS) | Alta (Hadoop) |
 | **Tolerància a fallades** | Sí, sense SPoF | Sí, alta disponibilitat | Sí, replicació distribuïda |
-| **Rendiment**         | Alt per escriptures | Alta velocitat per consultes simples | Bo per Big Data |
+| **Rendiment** | Alt per escriptures | Alta velocitat per consultes simples | Bo per Big Data |
 | **Casos d’ús ideals** | Big Data, IoT, xarxes socials | Aplicacions serverless i cloud | Big Data en Hadoop |
-| **Consistència**       | Eventual (opcionalment forta) | Eventual per defecte | Forta (Zookeeper) |
+| **Consistència** | Eventual (opcionalment forta) | Eventual per defecte | Forta (Zookeeper) |
 | **Suport per transaccions ACID** | No | No | No |
+
 
 ## LA INSTAL·LACIÓ PAS A PAS
 
@@ -41,131 +44,157 @@ Cassandra disposa de diverses edicions que s'adapten a diferents necessitats:
 
 Descarrega i executa Cassandra:
 
-```sh
+```
 docker run --name cassandra -d -p 9042:9042 -p 7000:7000 cassandra:latest
 ```
 
 Accedeix a la línia de comandes de Cassandra (CQLSH):
 
-```sh
+```
 docker exec -it cassandra cqlsh
 ```
 
-Per llistar els Keyspaces que té Cassandra per defecte:
+Per llistar els Keyspaces que té Cassandra per defecte s’utilitza la sentència:
 
-```sql
+```
 DESCRIBE KEYSPACES;
 ```
 
-Crear un nou keyspace:
+Per crear un nou keyspace s’utilitza la sentència:
 
-```sql
-CREATE KEYSPACE <nom_keyspace> WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+```
+CREATE KEYSPACE
 ```
 
-Utilitzar un keyspace:
+Per a utilitzar un keyspace s’utilitza la sentència:
 
-```sql
-USE <nom_keyspace>;
+```
+USE <nom del keyspace>;
 ```
 
-Crear una taula:
+Per a crear una taula es fa amb:
 
-```sql
-CREATE TABLE <taula> (id UUID PRIMARY KEY, nom text);
+```
+CREATE TABLE;
 ```
 
-Inserir dades:
+Per a inserir dades a la taula ho fem amb:
 
-```sql
-INSERT INTO <taula> (id, nom) VALUES (uuid(), 'Nom de prova');
+```
+INSERT INTO;
 ```
 
-Llistar les dades:
+I per llistar les dades:
 
-```sql
+```
 SELECT * FROM <taula>;
 ```
 
-#### Configuració del Firewall
 
-Obrir el port 9042 per a connexió remota:
+### Configuració del Firewall
 
-```sh
+A la configuració del Firewall, s’ha d’obrir el port 9042 de connexió a Cassandra per a administració remota executant una comanda com aquesta:
+
+```
 iptables -A INPUT -p tcp --dport 9042 -j ACCEPT
 ```
 
-#### 2na Opció: Amb DataStax Enterprise (DSE) i Studio amb Docker (interfície gràfica)
+
+### 2na Opció: Amb DataStax Enterprise (DSE) i Studio amb Docker (interfície gràfica)
 
 Mitjançant aquest fitxer `docker-compose.yaml` aixequem els dos serveis que necessitem (DSE server i DataStax Studio).
 
-#### Connexió a la base de dades des de DataStax Studio
 
-Des del navegador, fem una petició a la IP del server mitjançant el port 9091. Un cop dins, es configura una connexió al BBDD, indicant la IP del server i el port 9042.
+### Connexió a la base de dades des de DataStax Studio
 
-Després d'establir la connexió amb la BBDD, es crea un nou notebook i se li assigna la connexió establerta anteriorment.
+Des del navegador fem una petició a la IP del server mitjançant el port 9091. Un cop dins, es configura una connexió a la BBDD, indicant la IP del server i el port 9042.
+
+Després d’establir la connexió amb la BBDD, es crea un nou notebook i se li assigna la connexió establerta anteriorment.
+
+Ara l’entorn de CQL està preparat per rebre sentències.
+
 
 ## Securització i operacions de Cassandra/DataStax Enterprise
 
-Activar l'autenticació amb usuari i contrasenya al fitxer `cassandra.yaml`:
+Activar l'autenticació amb usuari i contrasenya:
 
-```yaml
+```
 authenticator: PasswordAuthenticator
 authorizer: CassandraAuthorizer
 ```
 
-Reiniciar el contenidor i crear un usuari administrador:
+Un cop activada, s'ha de reiniciar el contenidor i crear usuaris amb permisos controlats mitjançant CQL:
 
-```sql
+```
 CREATE ROLE admin WITH PASSWORD = 'P@ssw0rd' AND LOGIN = true AND SUPERUSER = true;
 ```
+
 
 ## Gestió de Cassandra
 
 Arrencar Cassandra:
 
-```sh
+```
 docker start cassandra
 ```
 
 Verificar estat:
 
-```sh
+```
 docker ps -a
 ```
 
-Veure logs:
+Veure els logs:
 
-```sh
+```
 docker logs cassandra
 ```
 
 Aturar Cassandra:
 
-```sh
+```
 docker stop cassandra
 ```
 
+
 ## Fitxers de configuració i dades
 
-El fitxer de configuració de Cassandra es troba a:
+El fitxer de configuració de Cassandra es troba dins de la carpeta `etc` dins del contenidor:
 
 ```
 /etc/cassandra/cassandra.yaml
 ```
 
-Els fitxers de dades es troben a:
+Aquest fitxer defineix el comportament del node, ports, autenticació, ruta de dades, etc.
+
+La ubicació de les dades per defecte dins del contenidor és:
 
 ```
 /var/lib/cassandra/data
 ```
 
+Aquesta ruta es pot verificar amb:
+
+```
+docker exec -it cassandra ls /var/lib/cassandra/data
+```
+
+
 ## Ports utilitzats per Cassandra
 
-| Port  | Ús  |
-|------|----|
-| 7000 | Comunicació entre nodes |
-| 7001 | Comunicació segura entre nodes (SSL) |
-| 9042 | Connexions CQL (clients) |
-| 7199 | JMX per monitoratge |
-| 9091 | DataStax Studio (interfície gràfica) |
+```
+7000: comunicació entre nodes (no segura)
+7001: comunicació segura entre nodes (SSL)
+9042: connexions CQL (clients)
+7199: JMX (monitoratge)
+```
+
+Ports utilitzats per DSE (Interfície gràfica):
+
+```
+7000: Comunicació entre nodes
+7001: Comunicació entre nodes (SSL)
+9042: Connexions CQL (clients)
+7199: JMX per monitoratge
+9091: DataStax Studio (interfície gràfica)
+```
