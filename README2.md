@@ -1,6 +1,10 @@
-# DESCRIPCIÓ BASE DE DADES ESCOLLIDA: Apache Cassandra
+### 1r ASIX  
+**Ievgen Soloviov**  
+**Ayoub El Khalifi Idrissi El Jerari**
 
+---
 
+## DESCRIPCIÓ BASE DE DADES ESCOLLIDA
 ## Història i suport
 
 Apache Cassandra es va desenvolupar originalment a Facebook el 2008 per a gestionar la cerca en la seva funcionalitat de missatgeria. Posteriorment, va ser alliberat com a codi obert i donat a la comunitat Apache, passant a formar part de l'Apache Software Foundation (ASF) el 2010. Actualment, Cassandra és mantingut i desenvolupat per una comunitat activa de col·laboradors, amb el suport de grans empreses com DataStax, Amazon, i altres organitzacions tecnològiques.
