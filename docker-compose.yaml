@@ -1,0 +1,33 @@
+version: '3.8'
+
+networks:
+  cassandra-net:
+    driver: bridge
+
+volumes:
+  dse-data:
+
+services:
+  dse:
+    image: datastax/dse-server:6.8.0
+    container_name: dse
+    networks:
+      - cassandra-net
+    environment:
+      - DS_LICENSE=accept
+    ports:
+      - "9042:9042"
+      - "7000:7000"
+    command: ["-s"]
+    volumes:
+      - dse-data:/var/lib/cassandra
+
+  studio:
+    image: datastax/dse-studio:6.8.0
+    container_name: studio
+    networks:
+      - cassandra-net
+    environment:
+      - DS_LICENSE=accept
+    ports:
+      - "9091:9091"
