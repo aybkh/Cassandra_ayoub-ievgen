@@ -53,6 +53,8 @@ Descarrega i executa Cassandra:
 ```
 docker run --name cassandra -d -p 9042:9042 -p 7000:7000 cassandra:latest
 ```
+![Image](https://github.com/user-attachments/assets/9f3aa17a-82ce-4d5d-be83-c83d7205427d)
+
 Accedeix a la línia de comandes de Cassandra (CQLSH):
 
 ```
