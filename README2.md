@@ -31,7 +31,7 @@ Cassandra disposa de diverses edicions que s'adapten a diferents necessitats:
 
 | Característica | Apache Cassandra | Amazon DynamoDB | HBase |
 |--------------|----------------|----------------|------|
-| **Model de dades** | Clau-valor i columnes | Clau-valor | Columnar |
+| **Model de dades** | columnes | Clau-valor | Columnar |
 | **Escalabilitat** | Alta (distribuïda) | Alta (gestionada per AWS) | Alta (Hadoop) |
 | **Tolerància a fallades** | Sí, sense SPoF | Sí, alta disponibilitat | Sí, replicació distribuïda |
 | **Rendiment** | Alt per escriptures | Alta velocitat per consultes simples | Bo per Big Data |
