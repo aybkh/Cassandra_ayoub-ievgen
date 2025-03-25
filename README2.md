@@ -88,7 +88,7 @@ CREATE TABLE <taula> (id UUID PRIMARY KEY, nom text);
 Inserir dades:
 
 ```sql
-INSERT INTO <taula> (id, nom) VALUES (uuid(), 'Nom de prova');
+INSERT INTO <taula> (id, nom) VALUES (uuid(), 'Nom');
 ```
 Llistar les dades:
 
