@@ -115,10 +115,13 @@ Mitjançant aquest fitxer `docker-compose.yaml` aixequem els dos serveis que nec
 
 ### Connexió a la base de dades des de DataStax Studio
 ![Image](https://github.com/user-attachments/assets/066f4138-43f6-465c-a0e6-c6c22b1ca68e)
+
 Des del navegador fem una petició a la IP del server mitjançant el port 9091. Un cop dins, es configura una connexió a la BBDD, indicant la IP del server i el port 9042.
 ![Image](https://github.com/user-attachments/assets/17a58f40-505a-499f-bd2e-e20308e0b045)
+
 Després d’establir la connexió amb la BBDD, es crea un nou notebook i se li assigna la connexió establerta anteriorment.
 ![Image](https://github.com/user-attachments/assets/5a809013-9b61-4050-af05-13daf3acc7d9)
+
 Ara l’entorn de CQL està preparat per rebre sentències.
 ![Image](https://github.com/user-attachments/assets/e743faa0-820a-477e-8799-a4e62003b464)
 ![Image](https://github.com/user-attachments/assets/12e99206-eca5-4717-9e75-b4ea5f13703c)
