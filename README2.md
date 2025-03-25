@@ -1,4 +1,6 @@
-<h1 align="center"># APACHE CASSANDRA</h1>
+<h1 align="center">APACHE CASSANDRA</h1>
+
+![Image](https://github.com/user-attachments/assets/bee4a18b-585d-4734-9905-410e3efaabf9)
 
 ### 1r ASIX  
 **Ievgen Soloviov**  
@@ -53,7 +55,7 @@ Descarrega i executa Cassandra:
 ```
 docker run --name cassandra -d -p 9042:9042 -p 7000:7000 cassandra:latest
 ```
-![Image](https://github.com/user-attachments/assets/9f3aa17a-82ce-4d5d-be83-c83d7205427d)
+![Image](https://github.com/user-attachments/assets/5f699806-5699-4caa-90f5-8ce451e62a10)
 
 Accedeix a la línia de comandes de Cassandra (CQLSH):
 
@@ -66,37 +68,38 @@ Per llistar els Keyspaces que té Cassandra per defecte:
 ```sql
 DESCRIBE KEYSPACES;
 ```
+![Image](https://github.com/user-attachments/assets/df0d6ca9-0534-4293-965f-2cc109358392)
 
 Crear un nou keyspace:
 
 ```sql
 CREATE KEYSPACE <nom_keyspace> WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 ```
+![Image](https://github.com/user-attachments/assets/220b4fbc-0ae4-41b1-a857-231327f22741)
 
 Utilitzar un keyspace:
 
 ```sql
 USE <nom_keyspace>;
 ```
-
 Crear una taula:
 
 ```sql
 CREATE TABLE <taula> (id UUID PRIMARY KEY, nom text);
 ```
+![Image](https://github.com/user-attachments/assets/529c4fc5-798a-4bf9-bf48-5cc1f942a4d3)
 
 Inserir dades:
 
 ```sql
 INSERT INTO <taula> (id, nom) VALUES (uuid(), 'Nom de prova');
 ```
-
 Llistar les dades:
 
 ```sql
 SELECT * FROM <taula>;
 ```
-
+![Image](https://github.com/user-attachments/assets/19b3f62b-ede6-4078-9c9a-9fb95ae86c1f)
 
 
 ### Configuració del Firewall
@@ -111,16 +114,18 @@ iptables -A INPUT -p tcp --dport 9042 -j ACCEPT
 ### 2na Opció: Amb DataStax Enterprise (DSE) i Studio amb Docker (interfície gràfica)
 
 Mitjançant aquest fitxer `docker-compose.yaml` aixequem els dos serveis que necessitem (DSE server i DataStax Studio).
-
+![Image](https://github.com/user-attachments/assets/574b7629-cc5b-47b8-bdb0-aa78b0d9071d)
+![Image](https://github.com/user-attachments/assets/340bcba7-737b-4183-8b08-d91f61e2e1d8)
 
 ### Connexió a la base de dades des de DataStax Studio
-
+![Image](https://github.com/user-attachments/assets/066f4138-43f6-465c-a0e6-c6c22b1ca68e)
 Des del navegador fem una petició a la IP del server mitjançant el port 9091. Un cop dins, es configura una connexió a la BBDD, indicant la IP del server i el port 9042.
-
+![Image](https://github.com/user-attachments/assets/17a58f40-505a-499f-bd2e-e20308e0b045)
 Després d’establir la connexió amb la BBDD, es crea un nou notebook i se li assigna la connexió establerta anteriorment.
-
+![Image](https://github.com/user-attachments/assets/5a809013-9b61-4050-af05-13daf3acc7d9)
 Ara l’entorn de CQL està preparat per rebre sentències.
-
+![Image](https://github.com/user-attachments/assets/e743faa0-820a-477e-8799-a4e62003b464)
+![Image](https://github.com/user-attachments/assets/12e99206-eca5-4717-9e75-b4ea5f13703c)
 
 ## Securització i operacions de Cassandra/DataStax Enterprise
 
@@ -130,7 +135,7 @@ Activar l'autenticació amb usuari i contrasenya:
 authenticator: PasswordAuthenticator
 authorizer: CassandraAuthorizer
 ```
-
+![Image](https://github.com/user-attachments/assets/f2cb84f6-47a3-4b6e-bea0-ccb57a930c22)
 Un cop activada, s'ha de reiniciar el contenidor i crear usuaris amb permisos controlats mitjançant CQL:
 
 ```
@@ -186,7 +191,7 @@ Aquesta ruta es pot verificar amb:
 ```
 docker exec -it cassandra ls /var/lib/cassandra/data
 ```
-
+![Image](https://github.com/user-attachments/assets/3e17671e-dc34-471e-ba95-c51c2a13a06f)
 
 ## Ports utilitzats per Cassandra
 
@@ -206,3 +211,34 @@ Ports utilitzats per DSE (Interfície gràfica):
 7199: JMX per monitoratge
 9091: DataStax Studio (interfície gràfica)
 ```
+### EXTRA: Connexió des de Python (amb la llibreria cassandra-driver)
+
+```python
+from cassandra.cluster import Cluster
+
+# Connexió a Cassandra
+cluster = Cluster(contact_points=['192.168.224.3'], port=9042)
+session = cluster.connect()
+
+# Seleccionar el keyspace correcte
+session.set_keyspace('ayoub_ievgen')
+
+# Insertar dades
+session.execute("""
+INSERT INTO asix (id, nom, edat) VALUES (uuid(), 'Dani', 21);
+""")
+
+# Tancar la connexió
+cluster.shutdown()
+
+```
+---
+
+## REFERÈNCIES
+
+- https://cassandra.apache.org
+- https://hub.docker.com/_/cassandra
+- https://docs.docker.com/engine/install/debian
+- https://hub.docker.com/r/datastax/dse-server
+- https://hub.docker.com/r/datastax/dse-studio
+- https://chatgpt.com/
