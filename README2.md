@@ -1,4 +1,4 @@
-# APACHE CASSANDRA
+<h1 align="center"># APACHE CASSANDRA</h1>
 
 ### 1r ASIX  
 **Ievgen Soloviov**  
