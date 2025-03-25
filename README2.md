@@ -2,10 +2,6 @@
 
 ![Image](https://github.com/user-attachments/assets/bee4a18b-585d-4734-9905-410e3efaabf9)
 
-### 1r ASIX  
-**Ievgen Soloviov**  
-**Ayoub El Khalifi Idrissi El Jerari**
-
 ---
 
 ## DESCRIPCIÓ BASE DE DADES ESCOLLIDA
@@ -242,3 +238,8 @@ cluster.shutdown()
 - https://hub.docker.com/r/datastax/dse-server
 - https://hub.docker.com/r/datastax/dse-studio
 - https://chatgpt.com/
+---
+
+### 1r ASIX  
+**Ievgen Soloviov**  
+**Ayoub El Khalifi Idrissi El Jerari**
